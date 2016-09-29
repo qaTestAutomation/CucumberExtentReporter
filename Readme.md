@@ -25,6 +25,7 @@ If not, download the jar from [here](http://search.maven.org/remotecontent?filep
 - User now can add test runner log from anywhere. The output will be displayed under the Log tab in the report. Refer the example.
 - All the step keywords from cucumber is now displayed.
 - Fixed the issue in displaying Bug tab.
+- Fixed to list the feature tags in the Categories section.
 
 ### v1.1.0
 - User now can add system information to the report.
