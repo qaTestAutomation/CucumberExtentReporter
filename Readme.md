@@ -18,7 +18,7 @@ If you are using a maven based project, you can directly add this library as a d
 </dependency>
 ```
 
-Please note that adding the dependency of ExtentReport v3.0.2+ is mandatory.
+Please note that **Java 8+** and adding the dependency of **ExtentReport v3.0.2+** is mandatory.
 
 If not, download the jar from [here](http://search.maven.org/#search%7Cga%7C1%7Ccucumber-extentsreport).
 
