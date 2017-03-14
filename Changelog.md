@@ -1,5 +1,8 @@
 # Changelog
 
+### v2.0.4
+- Reverted the optional file parameter for the plugin due to a bug in Cucumber
+
 ### v2.0.3
 - Fixed the bug while running on parallel using TestNG 
 
