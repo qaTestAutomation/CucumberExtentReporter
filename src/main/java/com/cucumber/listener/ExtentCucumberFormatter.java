@@ -103,7 +103,7 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
                 data[i][j] = cells.get(j);
             }
         }
-        test.info(MarkupHelper.createTable(data));
+        test.info(CucumberMarkupHelper.createExampleTable(data));
     }
 
     public void startOfScenarioLifeCycle(Scenario scenario) {
@@ -205,7 +205,7 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
         ExtentTest stepTest = scenarioTest.createNode(step.getKeyword() + step.getName());
 
         if (data != null) {
-            Markup table = MarkupHelper.createTable(data);
+            Markup table = CucumberMarkupHelper.createStepDataTable(data);
             stepTest.info(table);
         }
 

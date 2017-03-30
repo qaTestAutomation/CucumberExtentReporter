@@ -25,6 +25,8 @@ public class RunCukesTest {
         Reporter.setSystemInfo("user", System.getProperty("user.name"));
         Reporter.setSystemInfo("os", "Mac OSX");
         Reporter.setTestRunnerOutput("Sample test runner output message");
+//        Reporter.getExtentHtmlReport().config().setTimeStampFormat("dd/mm/yyyy hh:mm:ss a");
+//        Reporter.getExtentHtmlReport().setAppendExisting(true);
     }
 
 }

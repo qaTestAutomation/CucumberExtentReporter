@@ -7,9 +7,9 @@ Feature: My First Feature
     Then I print
 
     Examples:
-    | test |
-    | 1    |
-    | 2    |
+    | test | details |
+    | 1    | 2       |
+    | 2    | 3       |
 
   @scenarioTag
   Scenario: My Second Scenario
