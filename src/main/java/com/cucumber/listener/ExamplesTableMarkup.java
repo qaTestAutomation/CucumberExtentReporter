@@ -2,13 +2,26 @@ package com.cucumber.listener;
 
 import com.aventstack.extentreports.markuputils.Markup;
 
+/**
+ * Creates an examples data table in the report
+ */
 class ExamplesTableMarkup implements Markup {
     private String[][] data;
 
+    /**
+     * Sets the data required for the table creation
+     *
+     * @param data The data in a String array format
+     */
     public void setData(String[][] data) {
         this.data = data;
     }
 
+    /**
+     * Gets the data to be displayed in the table
+     *
+     * @return The data in a String array format
+     */
     public String[][] getData() {
         return data;
     }
@@ -46,5 +59,4 @@ class ExamplesTableMarkup implements Markup {
         sb.append("</table>");
         return sb.toString();
     }
-
 }
