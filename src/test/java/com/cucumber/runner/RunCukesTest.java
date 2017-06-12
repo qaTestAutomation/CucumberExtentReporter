@@ -4,6 +4,7 @@ import com.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import java.io.File;
@@ -15,12 +16,16 @@ import java.io.File;
 @CucumberOptions(
     features = {"src/test/resources/features"},
     glue = {"com.cucumber.stepdefinitions"},
-    plugin = {"com.cucumber.listener.ExtentCucumberFormatter:output/report.html"}
+    plugin = {"com.cucumber.listener.ExtentCucumberFormatter:"}
 )
 public class RunCukesTest {
+    @BeforeClass
+    public static void setup() {
+        System.setProperty("cucumberReportPath", "output/myreport.html");
+    }
 
     @AfterClass
-    public static void setup() {
+    public static void teardown() {
         Reporter.loadXMLConfig(new File("src/test/resources/extent-config.xml"));
         Reporter.setSystemInfo("user", System.getProperty("user.name"));
         Reporter.setSystemInfo("os", "Mac OSX");

@@ -14,7 +14,7 @@ import java.io.File;
 )
 public class MyTestNGCukesRunner extends AbstractTestNGCucumberTests {
     @AfterClass
-    public static void setup() {
+    public static void teardown() {
         Reporter.loadXMLConfig(new File("src/test/resources/extent-config.xml"));
         Reporter.setSystemInfo("user", System.getProperty("user.name"));
         Reporter.setSystemInfo("os", "Mac OSX");

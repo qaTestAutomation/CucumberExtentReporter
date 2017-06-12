@@ -19,6 +19,7 @@ import java.util.List;
  */
 public class ExtentCucumberFormatter implements Reporter, Formatter {
 
+    public static final String REPORT_PATH_PROPERTY = "cucumberReportPath";
     private static ExtentReports extentReports;
     private static ExtentHtmlReporter htmlReporter;
     private static ThreadLocal<ExtentTest> featureTestThreadLocal = new InheritableThreadLocal<>();
@@ -40,8 +41,22 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
         if (htmlReporter != null) {
             return;
         }
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
+        try {
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+            }
+        } catch (NullPointerException e) {
+            String filePath;
+            if (System.getProperty(REPORT_PATH_PROPERTY) != null && !System.getProperty(REPORT_PATH_PROPERTY).isEmpty()) {
+                filePath = System.getProperty(REPORT_PATH_PROPERTY);
+            } else {
+                filePath = "output" + File.separator + "Run_" + System.currentTimeMillis() +
+                        File.separator + "report.html";
+            }
+            file = new File(filePath);
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+            }
         }
         htmlReporter = new ExtentHtmlReporter(file);
     }
