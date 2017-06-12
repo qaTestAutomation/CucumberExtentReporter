@@ -14,11 +14,11 @@ If you are using a maven based project, you can directly add this library as a d
 <dependency>
     <groupId>com.vimalselvam</groupId>
     <artifactId>cucumber-extentsreport</artifactId>
-    <version>2.0.4</version>
+    <version>2.0.5</version>
 </dependency>
 ```
 
-Please note that **Java 8+** and adding the dependency of **ExtentReport v3.0.2+** is mandatory.
+Please note that **Java 8+** and adding the dependency of **ExtentReport v3.0.2+** is mandatory, however prefer adding **ExtentReport v3.0.6** since ExtentReport now has `ScenarioOutline` support.
 
 If not, download the jar from [here](http://search.maven.org/#search%7Cga%7C1%7Ccucumber-extentsreport).
 
@@ -54,7 +54,7 @@ import java.io.File;
 )
 public class RunCukesTest {
     @AfterClass
-    public static void setup() {
+    public static void teardown() {
         Reporter.loadXMLConfig(new File("src/test/resources/extent-config.xml"));
         Reporter.setSystemInfo("user", System.getProperty("user.name"));
         Reporter.setSystemInfo("os", "Mac OSX");
@@ -64,9 +64,25 @@ public class RunCukesTest {
 
 ```
 
-Please note that the plugin `com.cucumber.listener.ExtentCucumberFormatter` requires an argument of where the report file should be generated.
+The above setup will generate the report in `output` directory with the name of `report.html`. There are 3 ways to configure the report location:
 
-The above example shows a JUnit runner. However, you can use the TestNG runner too.
+- As shown above, pass the report file path along with `com.cucumber.listener.ExtentCucumberFormatter:`
+- If in case you want a dynamic location, you can leave the file path parameter empty while configuring the plugin. For example:
+    `plugin = {"com.cucumber.listener.ExtentCucumberFormatter:"}`
+    This will generate the report file in the location `output/Run_<Current Time Stamp>/report.html`.
+- You can also configure the report location by using system property as follows. Leave the plugin configuration empty, and configure the report location in your `@BeforeClass` method:
+    ```java
+    plugin = {"com.cucumber.listener.ExtentCucumberFormatter:"}
+    ......
+    ......
+    @BeforeClass
+    public static void setup() {
+        System.setProperty("cucumberReportPath", "mylocation/myreportfile.html");
+    }
+    ```
+    The property name should be always `cucumberReportPath`.
+
+The above example shows a JUnit runner. However, you can use the TestNG runner too. Refer more examples [here](https://github.com/email2vimalraj/CucumberExtentReporter/tree/master/src/test/java/com/cucumber/runner). 
 Also make sure the `loadXMLConfig`, `setSystemInfo` and `setTestRunnerOutput` methods should be in your `@AfterClass` method.
 
 ### Logging
@@ -83,7 +99,7 @@ Reporter.addScenarioLog("Scenario Log message goes here");
 ```
 
 ### Adding screenshot / screen cast
-The screenshot or screen cast can be added from any of the step as follows:
+The screenshot or screen cast can be added from any of the step as follows. Please note that the plugin will not take the screenshot, instead it helps you to attach the screenshot file which should be already available in the mentioned path. If you are looking for on how to take the screenshot using Selenium, please refer [this](http://www.seleniumeasy.com/selenium-tutorials/take-screenshot-with-selenium-webdriver):
 
 ```java
 Reporter.addScreenCaptureFromPath("absolute screenshot path");
@@ -91,6 +107,6 @@ Reporter.addScreenCastFromPath("absolute screen cast path");
 ```
 
 ## Demo
-[Report](report.html)
+[Report](http://vimalselvam.com/cucumberextentreport/report.html)
 
 Fore more details, kindly visit [Cucumber Extent Reporter](http://www.vimalselvam.com/cucumber-extent-reporter/).
