@@ -14,13 +14,13 @@ If you are using a maven based project, you can directly add this library as a d
 <dependency>
     <groupId>com.vimalselvam</groupId>
     <artifactId>cucumber-extentsreport</artifactId>
-    <version>2.0.5</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 
-Please note that **Java 8+** and adding the dependency of **ExtentReport v3.0.2+** is mandatory, however prefer adding **ExtentReport v3.0.6** since ExtentReport now has `ScenarioOutline` support.
+Please note that **Java 8+** and adding the dependency of **ExtentReport v3.0.6+** is mandatory.
 
-If not, download the jar from [here](http://search.maven.org/#search%7Cga%7C1%7Ccucumber-extentsreport).
+If you are not using maven, download the jar from [here](http://search.maven.org/#search%7Cga%7C1%7Ccucumber-extentsreport).
 
 ## Release Notes
 For more details, look at [Changelog](Changelog.md).
@@ -28,9 +28,9 @@ For more details, look at [Changelog](Changelog.md).
 ## Getting Started
 
 ### Runner Class example:
-Create a runner class and add the `com.cucumber.listener.ExtentCucumberFormatter:output/report.html` as a plugin followed by the report file as input.
+Create a runner class and add the `com.cucumber.listener.ExtentCucumberFormatter:output/report.html` as a plugin followed by the report file as input (**optional parameter**).
 
-A sample example is show below:
+A sample example is shown below:
 
 ```java
 package com.cucumber.runner;
@@ -70,20 +70,42 @@ The above setup will generate the report in `output` directory with the name of 
 - If in case you want a dynamic location, you can leave the file path parameter empty while configuring the plugin. For example:
     `plugin = {"com.cucumber.listener.ExtentCucumberFormatter:"}`
     This will generate the report file in the location `output/Run_<Current Time Stamp>/report.html`.
-- You can also configure the report location by using system property as follows. Leave the plugin configuration empty, and configure the report location in your `@BeforeClass` method:
+- You can also configure the report location by using `ExtentProperties` enum as follows. Leave the plugin configuration empty, and configure the report location in your `@BeforeClass` method:
     ```java
     plugin = {"com.cucumber.listener.ExtentCucumberFormatter:"}
     ......
     ......
     @BeforeClass
     public static void setup() {
-        System.setProperty("cucumberReportPath", "mylocation/myreportfile.html");
+        ExtentProperties extentProperties = ExtentProperties.INSTANCE;
+        extentProperties.setReportPath("output/myreport.html");
     }
     ```
-    The property name should be always `cucumberReportPath`.
 
 The above example shows a JUnit runner. However, you can use the TestNG runner too. Refer more examples [here](https://github.com/email2vimalraj/CucumberExtentReporter/tree/master/src/test/java/com/cucumber/runner). 
 Also make sure the `loadXMLConfig`, `setSystemInfo` and `setTestRunnerOutput` methods should be in your `@AfterClass` method.
+
+### Setting up ExtentX
+The current release added a support for `ExtentX`. The results of your execution can be sent to `ExtentX` dashboard.
+
+The `ExtentX` configurations can be set up using `ExtentProperties` enum as follows:
+
+```java
+plugin = {"com.cucumber.listener.ExtentCucumberFormatter:"}
+......
+......
+@BeforeClass
+public static void setup() {
+    ExtentProperties extentProperties = ExtentProperties.INSTANCE;
+    extentProperties.setReportPath("output/myreport.html");
+    extentProperties.setExtentXServerUrl("http://localhost:1337");
+    extentProperties.setProjectName("MyProject");
+}
+```
+
+You can either setup ExtentX in your local / remote machine using:
+- [A docker approach - 2 minutes to setup](http://www.vimalselvam.com/2017/04/13/shipping-extentx-in-a-docker-container/)
+- [A plain vanilla approach](http://extentreports.com/docs/extentx/)
 
 ### Logging
 User can add logs at any step and those logs will be captured and attached to the corresponding step. The log should be added as follows:
@@ -109,4 +131,4 @@ Reporter.addScreenCastFromPath("absolute screen cast path");
 ## Demo
 [Report](http://vimalselvam.com/cucumberextentreport/report.html)
 
-Fore more details, kindly visit [Cucumber Extent Reporter](http://www.vimalselvam.com/cucumber-extent-reporter/).
+Fore more details, kindly visit [http://www.vimalselvam.com/cucumber-extent-reporter/](http://www.vimalselvam.com/cucumber-extent-reporter/).
