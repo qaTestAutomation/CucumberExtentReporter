@@ -1,5 +1,6 @@
 package com.cucumber.runner;
 
+import com.cucumber.listener.ExtentProperties;
 import com.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
@@ -16,7 +17,10 @@ import java.io.File;
 public class TestNGCukesRunner extends AbstractTestNGCucumberTests {
     @BeforeClass
     public  static void setup() {
-        System.err.println("Hello");
+        ExtentProperties extentProperties = ExtentProperties.INSTANCE;
+        extentProperties.setExtentXServerUrl("http://localhost:1337");
+        extentProperties.setProjectName("TestNGProject");
+        extentProperties.setReportPath("output/myreport.html");
     }
 
     @AfterClass

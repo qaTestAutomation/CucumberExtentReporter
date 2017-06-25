@@ -6,11 +6,14 @@ import com.aventstack.extentreports.GherkinKeyword;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.ExtentXReporter;
 import gherkin.formatter.Formatter;
 import gherkin.formatter.Reporter;
 import gherkin.formatter.model.*;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,8 +21,6 @@ import java.util.List;
  * A cucumber based reporting listener which generates the Extent Report
  */
 public class ExtentCucumberFormatter implements Reporter, Formatter {
-
-    public static final String REPORT_PATH_PROPERTY = "cucumberReportPath";
     private static ExtentReports extentReports;
     private static ExtentHtmlReporter htmlReporter;
     private static ThreadLocal<ExtentTest> featureTestThreadLocal = new InheritableThreadLocal<>();
@@ -33,7 +34,7 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
     public ExtentCucumberFormatter(File file) {
         setExtentHtmlReport(file);
         setExtentReport();
-        stepListThreadLocal.set(new LinkedList<Step>());
+        stepListThreadLocal.set(new LinkedList<>());
         scenarioOutlineFlag = false;
     }
 
@@ -46,14 +47,7 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
                 file.getParentFile().mkdirs();
             }
         } catch (NullPointerException e) {
-            String filePath;
-            if (System.getProperty(REPORT_PATH_PROPERTY) != null && !System.getProperty(REPORT_PATH_PROPERTY).isEmpty()) {
-                filePath = System.getProperty(REPORT_PATH_PROPERTY);
-            } else {
-                filePath = "output" + File.separator + "Run_" + System.currentTimeMillis() +
-                        File.separator + "report.html";
-            }
-            file = new File(filePath);
+            file = new File(ExtentProperties.INSTANCE.getReportPath());
             if (!file.exists()) {
                 file.getParentFile().mkdirs();
             }
@@ -70,6 +64,20 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
             return;
         }
         extentReports = new ExtentReports();
+        ExtentProperties extentProperties = ExtentProperties.INSTANCE;
+        if (extentProperties.getExtentXServerUrl() != null || !extentProperties.getExtentXServerUrl().isEmpty()) {
+            String extentXServerUrl = extentProperties.getExtentXServerUrl();
+            try {
+                URL url = new URL(extentXServerUrl);
+                ExtentXReporter xReporter = new ExtentXReporter(url.getHost());
+                xReporter.config().setServerUrl(extentXServerUrl);
+                xReporter.config().setProjectName(extentProperties.getProjectName());
+                extentReports.attachReporter(htmlReporter, xReporter);
+                return;
+            } catch (MalformedURLException e) {
+                throw new IllegalArgumentException("Invalid ExtentX Server URL", e);
+            }
+        }
         extentReports.attachReporter(htmlReporter);
     }
 

@@ -1,5 +1,6 @@
 package com.cucumber.runner;
 
+import com.cucumber.listener.ExtentProperties;
 import com.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -21,7 +22,10 @@ import java.io.File;
 public class RunCukesTest {
     @BeforeClass
     public static void setup() {
-        System.setProperty("cucumberReportPath", "output/myreport.html");
+        ExtentProperties extentProperties = ExtentProperties.INSTANCE;
+        extentProperties.setExtentXServerUrl("http://localhost:1337");
+        extentProperties.setProjectName("MyProject");
+        extentProperties.setReportPath("output/myreport.html");
     }
 
     @AfterClass
