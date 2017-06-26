@@ -23,8 +23,8 @@ public class RunCukesTest {
     @BeforeClass
     public static void setup() {
         ExtentProperties extentProperties = ExtentProperties.INSTANCE;
-        extentProperties.setExtentXServerUrl("http://localhost:1337");
-        extentProperties.setProjectName("MyProject");
+//        extentProperties.setExtentXServerUrl("http://localhost:1337");
+//        extentProperties.setProjectName("MyProject");
         extentProperties.setReportPath("output/myreport.html");
     }
 

@@ -18,8 +18,8 @@ public class TestNGCukesRunner extends AbstractTestNGCucumberTests {
     @BeforeClass
     public  static void setup() {
         ExtentProperties extentProperties = ExtentProperties.INSTANCE;
-        extentProperties.setExtentXServerUrl("http://localhost:1337");
-        extentProperties.setProjectName("TestNGProject");
+//        extentProperties.setExtentXServerUrl("http://localhost:1337");
+//        extentProperties.setProjectName("TestNGProject");
         extentProperties.setReportPath("output/myreport.html");
     }
 

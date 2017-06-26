@@ -42,15 +42,11 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
         if (htmlReporter != null) {
             return;
         }
-        try {
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-            }
-        } catch (NullPointerException e) {
+        if (file == null || file.getPath().isEmpty()) {
             file = new File(ExtentProperties.INSTANCE.getReportPath());
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-            }
+        }
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
         }
         htmlReporter = new ExtentHtmlReporter(file);
     }
@@ -65,7 +61,7 @@ public class ExtentCucumberFormatter implements Reporter, Formatter {
         }
         extentReports = new ExtentReports();
         ExtentProperties extentProperties = ExtentProperties.INSTANCE;
-        if (extentProperties.getExtentXServerUrl() != null || !extentProperties.getExtentXServerUrl().isEmpty()) {
+        if (extentProperties.getExtentXServerUrl() != null) {
             String extentXServerUrl = extentProperties.getExtentXServerUrl();
             try {
                 URL url = new URL(extentXServerUrl);
