@@ -140,6 +140,14 @@ public class Reporter {
         getExtentReport().setTestRunnerOutput(outputMessage);
     }
 
+    /**
+     * Sets the author name for the current scenario
+     * @param authorName The author name of the current scenario
+     */
+    public static void assignAuthor(String... authorName) {
+        getCurrentScenario().assignAuthor(authorName);
+    }
+
     private static ExtentTest getCurrentStep() {
         return ExtentCucumberFormatter.stepTestThreadLocal.get();
     }

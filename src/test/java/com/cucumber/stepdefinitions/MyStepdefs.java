@@ -2,6 +2,8 @@ package com.cucumber.stepdefinitions;
 
 import com.cucumber.listener.Reporter;
 import cucumber.api.DataTable;
+import cucumber.api.Scenario;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -9,6 +11,13 @@ import cucumber.api.java.en.When;
 import java.io.IOException;
 
 public class MyStepdefs {
+
+    @Before
+    public void beforeScenario(Scenario scenario) {
+        if (scenario.getName().equals("My First Scenario")) {
+            Reporter.assignAuthor("Vimalraj");
+        }
+    }
 
     @Given("I have (\\d+) cukes in my belly") public void I_have_cukes_in_my_belly(int cukes)
         throws IOException {
