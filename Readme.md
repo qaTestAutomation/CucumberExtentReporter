@@ -14,7 +14,7 @@ If you are using a maven based project, you can directly add this library as a d
 <dependency>
     <groupId>com.vimalselvam</groupId>
     <artifactId>cucumber-extentsreport</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
 </dependency>
 ```
 
@@ -126,6 +126,20 @@ The screenshot or screen cast can be added from any of the step as follows. Plea
 ```java
 Reporter.addScreenCaptureFromPath("absolute screenshot path");
 Reporter.addScreenCastFromPath("absolute screen cast path");
+```
+
+### Assigning Authors to the Scenario
+You can assign authors to the scenario using `Reporter.assignAuthor("author1", "author2", ...);`. 
+
+Ideally this should be added at the hooks level. For example, the following sample shows how to assign author to a particular scenario using `Before` hook:
+
+```java
+@Before
+public void beforeScenario(Scenario scenario) {
+    if (scenario.getName().equals("Some scenario name")) {
+        Reporter.assignAuthor("Author1");
+    }
+}
 ```
 
 ## Demo
