@@ -7,10 +7,6 @@ The [ExtentReports](http://extentreports.relevantcodes.com/) plugin is developed
 ## Build Status
 [![Build Status](https://travis-ci.org/email2vimalraj/CucumberExtentReporter.svg?branch=master)](https://travis-ci.org/email2vimalraj/CucumberExtentReporter)
 
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/XhfFiVtGMXhfiynNYZxdsCvP/email2vimalraj/CucumberExtentReporter'>
-  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/XhfFiVtGMXhfiynNYZxdsCvP/email2vimalraj/CucumberExtentReporter.svg' />
-</a>
-
 ## Usage
 If you are using a maven based project, you can directly add this library as a dependency:
 
@@ -18,11 +14,21 @@ If you are using a maven based project, you can directly add this library as a d
 <dependency>
     <groupId>com.vimalselvam</groupId>
     <artifactId>cucumber-extentsreport</artifactId>
-    <version>3.0.1</version>
+    <version>3.0.2</version>
 </dependency>
 ```
 
-Please note that **Java 8+** and adding the dependency of **ExtentReport v3.0.6+** is mandatory.
+Please note that **Java 8+** and adding the dependency of **ExtentReport v3.1.1+** is mandatory.
+
+I've been receiving queries often that the extent report class not found. As I mentioned in my last statement, you will have to explicitly add ExtentReport as a maven dependency. To do that, paste the following in your pom.xml:
+
+```
+<dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>3.1.1</version>
+</dependency>
+```
 
 If you are not using maven, download the jar from [here](http://search.maven.org/#search%7Cga%7C1%7Ccucumber-extentsreport).
 
@@ -75,6 +81,7 @@ The above setup will generate the report in `output` directory with the name of 
     `plugin = {"com.cucumber.listener.ExtentCucumberFormatter:"}`
     This will generate the report file in the location `output/Run_<Current Time Stamp>/report.html`.
 - You can also configure the report location by using `ExtentProperties` enum as follows. Leave the plugin configuration empty, and configure the report location in your `@BeforeClass` method:
+    
     ```java
     plugin = {"com.cucumber.listener.ExtentCucumberFormatter:"}
     ......
