@@ -97,7 +97,7 @@ The above example shows a JUnit runner. However, you can use the TestNG runner t
 Also make sure the `loadXMLConfig`, `setSystemInfo` and `setTestRunnerOutput` methods should be in your `@AfterClass` method.
 
 ### Setting up ExtentX
-Since ExtentReport does not support ExtentX anymore, we have deprecated the ExtentX and added support for [Klov](#setting-up-klov). Thanks to (@msingh3)[https://github.com/msingh3] for the contribution.
+Since ExtentReport does not support ExtentX anymore, we have deprecated the ExtentX and added support for [Klov](#setting-up-klov). Thanks to [@msingh3](https://github.com/msingh3) for the contribution.
 
 ### Setting up Klov
 The current release added a support for `Klov`. The results of your execution can be sent to `Klov` dashboard.
