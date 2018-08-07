@@ -1,5 +1,8 @@
 # Changelog
 
+### v3.1.1
+- Changed the package names from `com.cucumber` to `com.vimalselvam` as this confuses the user that this project is supported by cucumber.
+
 ### v2.0.4
 - Reverted the optional file parameter for the plugin due to a bug in Cucumber
 

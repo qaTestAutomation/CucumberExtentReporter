@@ -1,6 +1,6 @@
-package com.cucumber.stepdefinitions;
+package com.vimalselvam.cucumber.stepdefinitions;
 
-import com.cucumber.listener.Reporter;
+import com.vimalselvam.cucumber.listener.Reporter;
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;
 import cucumber.api.java.Before;

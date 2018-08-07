@@ -1,7 +1,7 @@
-package com.cucumber.runner;
+package com.vimalselvam.cucumber.runner;
 
-import com.cucumber.listener.ExtentProperties;
-import com.cucumber.listener.Reporter;
+import com.vimalselvam.cucumber.listener.ExtentProperties;
+import com.vimalselvam.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.AfterClass;
@@ -16,8 +16,8 @@ import java.io.File;
 @RunWith(Cucumber.class)
 @CucumberOptions(
     features = {"src/test/resources/features"},
-    glue = {"com.cucumber.stepdefinitions"},
-    plugin = {"com.cucumber.listener.ExtentCucumberFormatter:"}
+    glue = {"com.vimalselvam.cucumber.stepdefinitions"},
+    plugin = {"com.vimalselvam.cucumber.listener.ExtentCucumberFormatter:"}
 )
 public class RunCukesTest {
     @BeforeClass

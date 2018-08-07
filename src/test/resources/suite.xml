@@ -3,8 +3,8 @@
 <suite name="Suite1" verbose="2" parallel="classes">
     <test name="Test" >
         <classes>
-            <class name="com.cucumber.runner.TestNGCukesRunner" />
-            <class name="com.cucumber.runner.MyTestNGCukesRunner" />
+            <class name="com.vimalselvam.cucumber.runner.TestNGCukesRunner" />
+            <class name="com.vimalselvam.cucumber.runner.MyTestNGCukesRunner" />
         </classes>
     </test>
 </suite>
